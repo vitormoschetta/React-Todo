@@ -3,7 +3,7 @@ import { Todo } from "../models/Todo";
 import { get, save } from "../services/TodoService";
 import { TodoContextType } from "./TodoContextType";
 
-export const TodoContext = createContext<TodoContextType>({
+export const TodoContext = createContext({
     todos: [],
     addTodo: () => { },
     removeTodo: () => { },
@@ -41,9 +41,10 @@ const TodoProvider = (props: any) => {
     }
 
     return (
-        <TodoContext.Provider value={{ todos, addTodo, removeTodo, toggle }}>
-            {props.children}
-        </TodoContext.Provider>
+        <div></div>
+        // <TodoContext.Provider value={{ todos, addTodo, removeTodo, toggle }}>
+        //     {props.children}
+        // </TodoContext.Provider>
     );
 }
 

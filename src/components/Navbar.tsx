@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 
 function Navbar() {
-  return (
-    <div className="uk-container">
+    return (
+        <div className="uk-container">
             <nav className="uk-navbar">
                 <div className="uk-navbar-letf">
-                    <a href="#" className="uk-navbar-item uk-logo">Create tasks</a>
+                    <a href="#" className="uk-navbar-item uk-logo">Home</a>
                 </div>
 
                 <div className="uk-navbar-right">
@@ -15,7 +15,7 @@ function Navbar() {
                         <li>
                             <Link to="/create">
                                 <a href="#">
-                                    <span uk-icon="icon: plus; ratio> 1.2"></span>
+                                    <span uk-icon="icon: plus; ratio: 1.5"></span>
                                 </a>
                             </Link>
                         </li>
@@ -23,7 +23,7 @@ function Navbar() {
                 </div>
             </nav>
         </div>
-  );
+    );
 }
 
 export default Navbar;
