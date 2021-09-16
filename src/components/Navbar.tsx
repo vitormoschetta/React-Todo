@@ -6,20 +6,11 @@ function Navbar() {
         <div className="uk-container">
             <nav className="uk-navbar">
                 <div className="uk-navbar-letf">
-                    <Link to="/" className="uk-navbar-item uk-logo">Todo List </Link>
+                    <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
                 </div>
-
-                <div className="uk-navbar-right">
-                    <ul className="uk-navbar-nav">
-                        <li>
-                            <Link to="/create">
-                                <a href="#">
-                                    <span uk-icon="icon: plus; ratio: 1.5"></span>
-                                </a>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
+                <div className="uk-navbar-letf">
+                    <Link to="/todos" className="uk-navbar-item uk-logo">Todos</Link>
+                </div>                
             </nav>
         </div>
     );

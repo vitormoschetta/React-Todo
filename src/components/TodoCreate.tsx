@@ -2,7 +2,7 @@ import { Todo } from '../models/Todo';
 import { get, save } from '../services/FakeTodoService';
 
 
-function AddTodo() {    
+export default function TodoCreate() {
 
     function create(title: string) {
         let todo: Todo = {
@@ -24,6 +24,3 @@ function AddTodo() {
         </form>
     );
 }
-
-
-export default AddTodo;
