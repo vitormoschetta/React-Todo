@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Todo } from "../models/Todo";
+import { TodoContextType } from "../contexts/TodoContextType";
+import TodoContext from "../contexts/TodoContext";
 
 interface TodoListItemProps {
-    todo: Todo;
+    todo: Todo
 }
 
+const TodoListItem = (props: TodoListItemProps) => {
 
-function TodoListItem(props: TodoListItemProps) {
+    const { removeTodo, toggle } = useContext<TodoContextType>(TodoContext)
 
-    function handlerChange(event:any) {        
-        console.log('mudou');
+    function onRemove(todo: Todo) {
+        removeTodo(todo)
+    }
+
+    function handlerChange(todo: Todo) {        
+        toggle(props.todo)
     }
 
     return (
@@ -18,7 +25,7 @@ function TodoListItem(props: TodoListItemProps) {
                 <label>
                     <input className="uk-checkbox" type="checkbox"
                         checked={props.todo.done}
-                        onChange={handlerChange}
+                        onChange={() => handlerChange(props.todo)}
                     />
                 </label>
             </td>
@@ -26,7 +33,8 @@ function TodoListItem(props: TodoListItemProps) {
                 {props.todo.title}
             </td>
             <td className="uk-width-auto">
-                <button className="uk-icon-button uk-button-danger" uk-icon="trash">
+                <button className="uk-icon-button uk-button-danger" uk-icon="trash"
+                onClick={() => onRemove(props.todo)}>
                 </button>
             </td>
         </tr>);
