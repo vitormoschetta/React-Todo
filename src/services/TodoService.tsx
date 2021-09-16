@@ -1,8 +1,9 @@
 import { Todo } from "../models/Todo";
 
+
 const TODO_STORE = 'todos';
 
-export const get = (): Todo[] => {
+export function get(): Todo[] {
     const data = localStorage.getItem(TODO_STORE) || '';
     try {
         const result = JSON.parse(data) as Todo[];
@@ -12,7 +13,6 @@ export const get = (): Todo[] => {
     }
 }
 
-export const save = (data: Todo[]) => {
-    if (data?.length >= 1)
-        localStorage.setItem(TODO_STORE, JSON.stringify(data));
+export function save(todo: Todo) {
+    localStorage.setItem(TODO_STORE, JSON.stringify(todo));
 }

@@ -1,7 +1,11 @@
 import AddTodo from "./AddTodo";
 import Navbar from "./Navbar";
-import { BrowserRouter as Router } from 'react-router-dom';
 import TodoList from "./TodoList";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route    
+} from "react-router-dom";
 
 
 function App() {
@@ -9,7 +13,14 @@ function App() {
         <div className="uk-container">
             <Router>
                 <Navbar></Navbar>
-                <TodoList></TodoList>
+                <Switch>
+                    <Route exact path="/">
+                        <TodoList />
+                    </Route>
+                    <Route path="/create">
+                        <AddTodo />
+                    </Route>
+                </Switch>
             </Router>
         </div>
     );

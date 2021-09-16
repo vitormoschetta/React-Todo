@@ -1,13 +1,11 @@
-
-import React from 'react';
 import { Todo } from '../models/Todo';
+import { get, save } from '../services/FakeTodoService';
 
-const TodoList = () => {
 
-    const todos: Todo[] = [
-        { id: 1, title: 'Ir ao mercado', done: false },
-        { id: 2, title: 'Ir a academia', done: false }
-    ]
+function TodoList() {
+
+    const todos: Todo[] = get()  
+    console.log(todos)  
 
     return (
         <table className="uk-table">

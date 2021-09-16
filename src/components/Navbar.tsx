@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from 'react-router-dom';
 
 
@@ -7,7 +6,7 @@ function Navbar() {
         <div className="uk-container">
             <nav className="uk-navbar">
                 <div className="uk-navbar-letf">
-                    <a href="#" className="uk-navbar-item uk-logo">Home</a>
+                    <Link to="/" className="uk-navbar-item uk-logo">Todo List </Link>
                 </div>
 
                 <div className="uk-navbar-right">
