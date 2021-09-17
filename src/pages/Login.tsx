@@ -1,17 +1,17 @@
 import { useContext } from "react";
+import { useHistory } from "react-router";
 import { AuthContext } from "../App";
 
 export default function Login() {
 
   const { user, setUser } = useContext(AuthContext)
+  let history = useHistory()
 
   function login() {
-    setUser({
-      id: '1',
-      name: 'vitor'
-    })
+    setUser({ id: '1', name: 'vitor' })
+    history.push('/todos')
   }
-  
+
   return (
     <div className="uk-container">
       <div>
@@ -31,13 +31,13 @@ export default function Login() {
         </div>
 
         <button
-          className="uk-button uk-button-primary uk-align-center uk-button-large uk-width-1-4"
+          className="uk-button uk-button-primary uk-align-center uk-button-large uk-width-1-5"
           type="submit"
           onClick={login}
         >
           Login
         </button>
-      </div>     
+      </div>
     </div>
   );
 }

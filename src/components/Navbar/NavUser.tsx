@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../App"
+import '../../styles/global.css'
 
 
 export default function UserNav() {
@@ -13,7 +14,7 @@ export default function UserNav() {
         return (
             <div className="uk-navbar-right">
                 <label className="uk-navbar-item uk-logo">{user.name}</label>
-                <button className="uk-navbar-item uk-logo" onClick={logout}>Sair</button>
+                <label className="uk-navbar-item uk-logo cursor-pointer" onClick={logout}>Sair</label>
             </div>
         )
     }
