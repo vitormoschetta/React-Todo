@@ -1,8 +1,8 @@
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Todos from "./pages/Todos";
-import TodoCreate from "./components/todo/TodoCreate";
-import TodoDelete from "./components/todo/TodoDelete";
+import TodoCreate from "./components/Todo/TodoCreate";
+import TodoDelete from "./components/Todo/TodoDelete";
 import { FakeTodoService } from "./services/FakeTodoService2";
 import {
     BrowserRouter as Router,
