@@ -35,7 +35,7 @@ export class FakeTodoService {
 
     delete(id: number): DataResult {
         for (var i = 0; i < this.list.length; i++) {
-            if (this.list[i].id == id) {
+            if (this.list[i].id === id) {
                 this.list.splice(i, 1)
                 return new DataResult(true, "Tarefa excluída com sucesso!", null)
             }
@@ -58,15 +58,15 @@ export class FakeTodoService {
     }
 
     exist(title: string): boolean {
-        var item = this.list.find(x => x.title == title)
-        if (item == undefined)
+        var item = this.list.find(x => x.title === title)
+        if (item === undefined)
             return false
         return true
     }
 
     existUpdate(title: string, id: number): boolean {
-        var item = this.list.find(x => x.title == title && x.id != id)
-        if (item == undefined)
+        var item = this.list.find(x => x.title === title && x.id !== id)
+        if (item === undefined)
             return false
         return true
     }

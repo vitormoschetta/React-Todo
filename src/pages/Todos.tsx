@@ -2,6 +2,8 @@ import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
 import '../styles/todos.css'
 import { FakeTodoService } from '../services/FakeTodoService2';
+import { useContext } from 'react';
+import { AuthContext } from '../App';
 
 
 interface TodoListProps {
@@ -12,13 +14,16 @@ interface TodoListProps {
 export default function TodoList(props: TodoListProps) {
 
     let match = useRouteMatch()
-    let history = useHistory();
+    let history = useHistory()
+    const { user } = useContext(AuthContext)
+
+    if (!user) history.push('/login')
 
 
     const todos: Todo[] = props.todoService.getAll()
 
     function deleteTodo() {
-        history.push('todos/delete');
+        history.push('todos/delete')
     }
 
     return (

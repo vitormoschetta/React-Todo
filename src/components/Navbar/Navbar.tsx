@@ -1,7 +1,13 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../App';
+import UserNav from './NavUser';
 
 
-function Navbar() {
+export default function Navbar() {
+
+    const { user } = useContext(AuthContext)
+
     return (
         <div className="uk-container">
             <nav className="uk-navbar">
@@ -10,10 +16,9 @@ function Navbar() {
                 </div>
                 <div className="uk-navbar-letf">
                     <Link to="/todos" className="uk-navbar-item uk-logo">Todos</Link>
-                </div>                
+                </div>
+                <UserNav />                
             </nav>
         </div>
     );
 }
-
-export default Navbar;

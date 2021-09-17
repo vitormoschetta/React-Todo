@@ -1,8 +1,13 @@
+import todoListImg from '../assets/images/todo.png'
+
+
 export default function Home() {
 
-    return (
-        <div className="uk-container">
-          <p>Content Home Page</p>
-        </div>
-    );
+  return (
+    <div className="uk-container">      
+      <div>
+        <img src={todoListImg} className="uk-width-1-4 uk-align-center" />
+      </div>
+    </div>
+  );
 }

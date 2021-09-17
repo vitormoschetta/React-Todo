@@ -25,12 +25,13 @@ export default function TodoCreate(props: TodoCreateProps) {
                 <input
                     className="uk-input uk-form-width-large uk-form-medium"
                     type="text"
-                    placeholder="Description"                    
+                    placeholder="Description"
                 />
             </div>
 
-            <button className="uk-button uk-button-primary"
-                onClick={() => createTodo(title)}
+            <button
+                className="uk-button uk-button-primary"
+                type="submit"
             >
                 Confirm
             </button>

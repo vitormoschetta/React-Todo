@@ -5,7 +5,7 @@ export default function TodoDelete() {
         <form>
             <div className="uk-margin">
                 <label>Item</label>
-            </div>            
+            </div>
 
             <button className="uk-button uk-button-danger">Confirm</button>
         </form>
