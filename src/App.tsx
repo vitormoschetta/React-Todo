@@ -1,40 +1,25 @@
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Todos from "./pages/Todos";
 import TodoCreate from "./components/Todo/TodoCreate";
 import TodoDelete from "./components/Todo/TodoDelete";
 import { FakeTodoService } from "./services/FakeTodoService2";
-import { createContext, useState } from "react";
+import AuthContextProvider from "./contexts/AuthContext";
 import {
     BrowserRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
-import Login from "./pages/Login";
 
-
-interface UserProps {
-    id: string
-    name: string
-}
-
-interface AuthContextProps {
-    user: UserProps | undefined
-    setUser: any
-}
-
-export const AuthContext = createContext({} as AuthContextProps)
 
 const todoService = new FakeTodoService()
 
-export default function App() {
-
-    const [user, setUser] = useState<UserProps>();    
-
+export default function App() {    
     return (
         <div className="uk-container">
             <Router>
-                <AuthContext.Provider value={{ user, setUser }}>
+                <AuthContextProvider>
                     <Navbar></Navbar>
                     <div className="uk-padding">
                         <Switch>
@@ -55,7 +40,7 @@ export default function App() {
                             </Route>
                         </Switch>
                     </div>
-                </AuthContext.Provider>
+                </AuthContextProvider>
             </Router>
         </div>
     );

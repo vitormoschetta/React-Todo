@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useHistory } from "react-router";
-import { AuthContext } from "../App";
+import { AuthContext } from "../contexts/AuthContext";
+
 
 export default function Login() {
 

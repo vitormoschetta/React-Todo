@@ -1,9 +1,9 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
-import '../styles/todos.css'
 import { FakeTodoService } from '../services/FakeTodoService2';
 import { useContext } from 'react';
-import { AuthContext } from '../App';
+import { AuthContext } from "../contexts/AuthContext";
+import '../styles/todos.css'
 
 
 interface TodoListProps {
