@@ -1,4 +1,4 @@
-function Home() {
+export default function Home() {
 
     return (
         <div className="uk-container">
@@ -6,5 +6,3 @@ function Home() {
         </div>
     );
 }
-
-export default Home;

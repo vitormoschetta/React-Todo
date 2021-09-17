@@ -1,13 +1,25 @@
-import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
-import { get, save } from '../services/FakeTodoService';
+import '../styles/todos.css'
+import { FakeTodoService } from '../services/FakeTodoService2';
 
 
-export default function TodoList() {
+interface TodoListProps {
+    todoService: FakeTodoService
+    children?: string
+}
 
-    let match = useRouteMatch();
+export default function TodoList(props: TodoListProps) {
 
-    const todos: Todo[] = get()
+    let match = useRouteMatch()
+    let history = useHistory();
+
+
+    const todos: Todo[] = props.todoService.getAll()
+
+    function deleteTodo() {
+        history.push('todos/delete');
+    }
 
     return (
         <div>
@@ -15,9 +27,7 @@ export default function TodoList() {
                 <ul className="uk-navbar-nav">
                     <li>
                         <Link to={`${match.url}/create`}>
-                            <a href="#">
-                                <span uk-icon="icon: plus; ratio: 1.5"></span>
-                            </a>
+                            <span uk-icon="icon: plus; ratio: 1.5"></span>
                         </Link>
                     </li>
                 </ul>
@@ -42,7 +52,10 @@ export default function TodoList() {
                                     {todo.title}
                                 </td>
                                 <td className="uk-width-auto">
-                                    <button className="uk-icon-button uk-button-danger" uk-icon="trash"></button>
+                                    <button
+                                        className="uk-icon-button uk-button-danger"
+                                        uk-icon="trash"
+                                        onClick={() => deleteTodo()} />
                                 </td>
                             </tr>
                         ))

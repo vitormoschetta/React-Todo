@@ -1,7 +1,9 @@
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Todos from "./pages/Todos";
-import TodoCreate from "./components/TodoCreate";
-import Navbar from "./components/Navbar";
+import TodoCreate from "./components/todo/TodoCreate";
+import TodoDelete from "./components/todo/TodoDelete";
+import { FakeTodoService } from "./services/FakeTodoService2";
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,7 +12,11 @@ import {
 } from "react-router-dom";
 
 
-export default function App() {
+
+const todoService = new FakeTodoService()
+
+export default function App() {    
+
     return (
         <div className="uk-container">
             <Router>
@@ -21,10 +27,13 @@ export default function App() {
                             <Home />
                         </Route>
                         <Route exact path="/todos">
-                            <Todos />
+                            <Todos todoService={todoService}/>
                         </Route>
                         <Route path="/todos/create">
-                            <TodoCreate />
+                            <TodoCreate todoService={todoService} />
+                        </Route>
+                        <Route path="/todos/delete">
+                            <TodoDelete />
                         </Route>
                     </Switch>
                 </div>
@@ -33,24 +42,4 @@ export default function App() {
     );
 }
 
-// or:
-
-export const AppRouter = () => {
-    return (
-        <BrowserRouter>
-            <div className="uk-container">
-                <div>
-                    <Navbar />
-                    <div className="uk-padding">
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/todos" component={Todos} />
-                            <Route path="/create" component={TodoCreate} />
-                        </Switch>
-                    </div>
-                </div>
-            </div>
-        </BrowserRouter>
-    );
-}
 

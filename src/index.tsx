@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
-import App, { AppRouter } from './App';
+import App from './App';
+
+import './services/firebase';
 
 ReactDOM.render(
   <React.StrictMode>    
-    <App></App>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
