@@ -1,27 +1,14 @@
-import React from "react"
-import { FakeTodoService } from "../../services/FakeTodoService2";
 
-export default class TodoDelete extends React.Component {
+export default function TodoDelete() {
 
-    todoService = new FakeTodoService()   
-    
-    constructor(props: any) {
-        super(props)   
-        let todoService = new FakeTodoService()     
-        this.state = todoService;
-    }
+    return (
+        <form>
+            <div className="uk-margin">
+                <label>Item</label>
+            </div>            
 
-    render() {
-        return (
-            <form>
-                <div className="uk-margin">
-                    <label>Item</label>
-                </div>
+            <button className="uk-button uk-button-danger">Confirm</button>
+        </form>
+    );
 
-                {this.todoService.getById(1).title}
-
-                <button className="uk-button uk-button-danger">Confirm</button>
-            </form>
-        );
-    }
 }
