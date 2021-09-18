@@ -1,14 +1,13 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
-import { FakeTodoService } from '../services/FakeTodoService2';
-import { TodosService } from '../services/TodosService';
+import { TodoService } from '../services/TodoService';
 import { useContext } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import '../styles/todos.css'
 
 
 interface TodoListProps {
-    todoService: TodosService
+    todoService: TodoService
     children?: string
 }
 
@@ -27,7 +26,7 @@ export default function TodoList(props: TodoListProps) {
     }
 
     function onRemove(todo: Todo) {
-        const todoService = new TodosService()
+        const todoService = new TodoService()
         todoService.remove(todo)
         history.push('/todos')
     }

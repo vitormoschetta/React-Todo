@@ -1,6 +1,6 @@
 import { Todo } from "../models/Todo";
 
-export class TodosService {
+export class TodoService {
 
     TODO_STORE: string = 'todos';
 

@@ -1,12 +1,11 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Todo } from '../../models/Todo';
-import { FakeTodoService } from '../../services/FakeTodoService2';
-import { TodosService } from '../../services/TodosService';
+import { TodoService } from '../../services/TodoService';
 
 
 interface TodoCreateProps {
-    todoService: TodosService
+    todoService: TodoService
     children?: string
 }
 
