@@ -13,20 +13,20 @@ interface TodoListProps {
 
 export default function TodoList(props: TodoListProps) {
 
+    const { user } = useContext(AuthContext)
+    const { todoService } = props
+
     let match = useRouteMatch()
     let history = useHistory()
 
-    const { user } = useContext(AuthContext)
-
     if (!user) history.push('/login')
 
-    const todos = props.todoService.get()
+    const todos = todoService.get()
 
     function handleChange(event: any) {
     }
 
     function onRemove(todo: Todo) {
-        const todoService = new TodoService()
         todoService.remove(todo)
         history.push('/todos')
     }

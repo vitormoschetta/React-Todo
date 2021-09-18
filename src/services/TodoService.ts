@@ -17,15 +17,12 @@ export class TodoService {
     }
 
     save(todo: Todo) {
-        this.todos = this.get()        
-        this.todos.push(todo)
-        localStorage.setItem(this.TODO_STORE, JSON.stringify(this.todos));
+        this.todos = this.get()
+        localStorage.setItem(this.TODO_STORE, JSON.stringify([...this.todos, todo]));
     }
 
     remove(todo: Todo) {
-        this.todos = this.get()
-        let index = this.todos.findIndex(x => x.id === todo.id)
-        this.todos.splice(index, 1)
+        this.todos = this.get().filter((item) => item.id !== todo.id)
         localStorage.setItem(this.TODO_STORE, JSON.stringify(this.todos));
     }
 }

@@ -10,11 +10,11 @@ export default function Login() {
 
   let history = useHistory()
 
-  const [userName, setUserName] = useState('')
+  const [userName, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [submit, setSubmit] = useState(false)
 
-  const { user, setUser } = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext)
 
   function handleLogin(event: FormEvent) {
 
@@ -44,7 +44,7 @@ export default function Login() {
             className="uk-input uk-form-width-large uk-form-large"
             type="text"
             placeholder="Username"
-            onChange={event => setUserName(event.target.value)}
+            onChange={event => setUsername(event.target.value)}
             value={userName}
           />
         </div>
@@ -72,7 +72,9 @@ export default function Login() {
 
 export function UsernameError(props: any) {
 
-  if (props.submit && props.username === '') {
+  const { submit, username } = props
+
+  if (submit && username === '') {
     return (
       <div className="uk-alert-danger" uk-alert>
         <a className="uk-alert-close" uk-close></a>
