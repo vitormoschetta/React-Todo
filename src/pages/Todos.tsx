@@ -13,7 +13,7 @@ interface TodoListProps {
 }
 
 export default function TodoList(props: TodoListProps) {
-    
+
     const { todoService } = props
     const { user } = useContext(AuthContext)
 
@@ -22,29 +22,23 @@ export default function TodoList(props: TodoListProps) {
 
     if (!user) history.push('/login')
 
-    const todos = todoService.get()   
+    const todos = todoService.get()
 
     return (
         <div>
-            <div className="uk-navbar-right">
-                <ul className="uk-navbar-nav">
-                    <li>
-                        <Link to={`${match.url}/create`}>
-                            <span uk-icon="icon: plus; ratio: 1.5"></span>
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
-            <table className="uk-table">
+            <table className="uk-table uk-text-large uk-text-light">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Tasks</th>
-                        <th></th>
+                        <th>
+                            <Link to={`${match.url}/create`}>
+                                <span uk-icon="icon: plus; ratio: 1.5"></span>
+                            </Link>
+                        </th>
                     </tr>
                 </thead>
-                <TodoItems todos={todos} />               
+                <TodoItems todos={todos} />
             </table>
         </div>
     );

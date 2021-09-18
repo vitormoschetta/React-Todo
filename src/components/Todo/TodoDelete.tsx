@@ -24,9 +24,14 @@ export default function TodoDelete(props: TodoDeleteProps) {
 
     return (
         <div>
-            <div className="uk-card uk-card-hover uk-card-body">
-                <h3 className="uk-card-title">{todo.title}</h3>
-            </div>   
+            <div className="uk-margin">
+                <input
+                    className="uk-input uk-form-width-large uk-form-large"
+                    type="text"                    
+                    value={todo.title}
+                    disabled
+                />
+            </div>
 
             <div>
                 <button
