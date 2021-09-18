@@ -22,13 +22,13 @@ export default function Login() {
 
     setSubmit(true)
 
-    if (userName.trim() === '') return
-
-    const userService = new UserService()
+    if (userName.trim() === '') return    
 
     let user = new User('1', userName)
 
     setUser(user)
+
+    const userService = new UserService()
 
     userService.setLocalStorage(user)
 
@@ -59,7 +59,7 @@ export default function Login() {
         </div>
 
         <button
-          className="uk-button uk-button-primary uk-button-large uk-width-1-5"
+          className="uk-button uk-button-primary uk-button-large uk-width-small"
           type="submit"
         >
           Login
@@ -76,7 +76,7 @@ export function UsernameError(props: any) {
     return (
       <div className="uk-alert-danger" uk-alert>
         <a className="uk-alert-close" uk-close></a>
-        <p>Nome de usuário inválido!</p>
+        <p>Login inválido!</p>
       </div>
     );
   }

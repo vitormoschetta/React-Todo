@@ -6,6 +6,7 @@ import TodoCreate from "./components/Todo/TodoCreate";
 import TodoDelete from "./components/Todo/TodoDelete";
 import { FakeTodoService } from "./services/FakeTodoService2";
 import AuthContextProvider from "./contexts/AuthContext";
+import { TodosService } from "./services/TodosService";
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,10 +14,11 @@ import {
 } from "react-router-dom";
 
 
+
 const todoService = new FakeTodoService()
 
-export default function App() {    
-    
+export default function App() {
+
     return (
         <div className="uk-container">
             <Router>
@@ -31,10 +33,10 @@ export default function App() {
                                 <Login />
                             </Route>
                             <Route exact path="/todos">
-                                <Todos todoService={todoService} />
+                                <Todos todoService={new TodosService()} />
                             </Route>
                             <Route path="/todos/create">
-                                <TodoCreate todoService={todoService} />
+                                <TodoCreate todoService={new TodosService()} />
                             </Route>
                             <Route path="/todos/delete">
                                 <TodoDelete />

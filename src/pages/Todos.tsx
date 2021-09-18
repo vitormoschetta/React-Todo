@@ -1,13 +1,14 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
 import { FakeTodoService } from '../services/FakeTodoService2';
+import { TodosService } from '../services/TodosService';
 import { useContext } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import '../styles/todos.css'
 
 
 interface TodoListProps {
-    todoService: FakeTodoService
+    todoService: TodosService
     children?: string
 }
 
@@ -15,15 +16,20 @@ export default function TodoList(props: TodoListProps) {
 
     let match = useRouteMatch()
     let history = useHistory()
+
     const { user } = useContext(AuthContext)
 
     if (!user) history.push('/login')
 
+    const todos = props.todoService.get()
 
-    const todos: Todo[] = props.todoService.getAll()
+    function handleChange(event: any) {
+    }
 
-    function deleteTodo() {
-        history.push('todos/delete')
+    function onRemove(todo: Todo) {
+        const todoService = new TodosService()
+        todoService.remove(todo)
+        history.push('/todos')
     }
 
     return (
@@ -51,7 +57,12 @@ export default function TodoList(props: TodoListProps) {
                         todos?.map(todo => (
                             <tr className="uk-animation-slide-bottom-medium">
                                 <td className="uk-width-auto">
-                                    <input className="uk-checkbox" type="checkbox" />
+                                    <input
+                                        className="uk-checkbox"
+                                        type="checkbox"
+                                        checked={todo.done}
+                                        onChange={handleChange}
+                                    />
                                 </td>
                                 <td className="uk-width-expand">
                                     {todo.title}
@@ -60,7 +71,8 @@ export default function TodoList(props: TodoListProps) {
                                     <button
                                         className="uk-icon-button uk-button-danger"
                                         uk-icon="trash"
-                                        onClick={() => deleteTodo()} />
+                                        onClick={() => onRemove(todo)}
+                                    />
                                 </td>
                             </tr>
                         ))
