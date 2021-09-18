@@ -16,7 +16,7 @@ export default function TodoCreate(props: TodoCreateProps) {
     const [title, setTitle] = useState('')
     const [submit, setSubmit] = useState(false)
 
-    let history = useHistory()    
+    let history = useHistory()
 
     function handleTodo(event: FormEvent) {
 
@@ -48,10 +48,17 @@ export default function TodoCreate(props: TodoCreateProps) {
             </div>
 
             <button
-                className="uk-button uk-button-primary uk-button-large uk-width-small"
+                className="uk-button uk-button-primary uk-button-large"
                 type="submit"
             >
                 Confirm
+            </button>
+
+            <button
+                className="uk-button uk-button-default uk-button-large uk-margin-left"
+                onClick={() => history.goBack()}
+            >
+                Return
             </button>
         </form>
     );

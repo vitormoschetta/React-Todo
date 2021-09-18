@@ -44,9 +44,7 @@ export default function TodoList(props: TodoListProps) {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <TodoItems todoService={todoService} todos={todos} />
-                </tbody>
+                <TodoItems todos={todos} />               
             </table>
         </div>
     );

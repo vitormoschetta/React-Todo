@@ -1,29 +1,30 @@
 import { useHistory } from "react-router-dom";
 import { Todo } from "../../models/Todo";
-import { TodoService } from "../../services/TodoService";
 
 
-interface TodoItemsProps {
-    todoService: TodoService
+interface TodoItemsProps {    
     todos: Todo[]
     children?: string
 }
 
 export default function TodoItems(props: TodoItemsProps) {
 
-    const { todoService, todos } = props
-    
-    let history = useHistory()    
+    const { todos } = props
+
+    const history = useHistory()
 
     function handleChange(event: any) { }
 
-    function onRemove(todo: Todo) {
-        todoService.remove(todo)
-        history.push('/todos')
+    function removeConfirmRedirect(todo: Todo) {        
+        history.push({
+            pathname: '/todos/delete',
+            search: `?id=${todo.id}`,
+            state: todo
+        })
     }
 
     return (
-        <div>
+        <tbody>                            
             {
                 todos?.map(todo => (
                     <tr className="uk-animation-slide-bottom-medium">
@@ -42,12 +43,12 @@ export default function TodoItems(props: TodoItemsProps) {
                             <button
                                 className="uk-icon-button uk-button-danger"
                                 uk-icon="trash"
-                                onClick={() => onRemove(todo)}
+                                onClick={() => removeConfirmRedirect(todo)}
                             />
                         </td>
                     </tr>
                 ))
             }
-        </div>    
-    )    
+        </tbody>
+    )
 }
