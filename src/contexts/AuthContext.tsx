@@ -16,6 +16,7 @@ export const AuthContext = createContext({} as AuthContextProps)
 export default function AuthContextProvider(props: AuthContextProviderProps) {
 
     const [user, setUser] = useState<IUser>()
+    const [texto, setTexto] = useState<string>()
 
     // useEffect(() => {
     //     let userAuth = userService.getLocalStorage()
