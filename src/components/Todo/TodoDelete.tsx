@@ -1,14 +1,9 @@
-import { TodoService } from "../../services/TodoService";
 import { useHistory, useLocation } from "react-router-dom";
 import { Todo } from "../../models/Todo";
+import { ITodoService } from '../../services/TodoService'
 
 
-interface TodoDeleteProps {
-    todoService: TodoService
-    children?: string
-}
-
-export default function TodoDelete(props: TodoDeleteProps) {
+export default function TodoDelete(props: ITodoService) {
 
     const { todoService } = props
 

@@ -1,20 +1,16 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
-import { TodoService } from '../services/TodoService';
+import { ITodoService, TodoService } from '../services/TodoService';
 import { useContext } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import '../styles/todos.css'
-import TodoItems from '../components/Todo/TodoItem';
+import TodoItem from '../components/Todo/TodoItem';
 
 
-interface TodoListProps {
-    todoService: TodoService
-    children?: string
-}
-
-export default function TodoList(props: TodoListProps) {
+export default function TodoList(props: ITodoService) {
 
     const { todoService } = props
+
     const { user } = useContext(AuthContext)
 
     let match = useRouteMatch()
@@ -41,10 +37,10 @@ export default function TodoList(props: TodoListProps) {
                 <tbody>
                     {
                         todos?.map(
-                            todo => (<TodoItems todo={todo} todoService={todoService}></TodoItems>)
+                            todo => (<TodoItem todo={todo} todoService={todoService}></TodoItem>)
                         )
                     }
-                </tbody>                
+                </tbody>
             </table>
         </div>
     );

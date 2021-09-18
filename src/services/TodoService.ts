@@ -1,5 +1,11 @@
 import { Todo } from "../models/Todo";
 
+
+export interface ITodoService {
+    todoService: TodoService
+    children?: string
+}
+
 export class TodoService {
 
     TODO_STORE: string = 'todos';

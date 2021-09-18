@@ -1,10 +1,16 @@
 import { User, UserProps } from "../models/User";
 
+
+export interface IUserService {
+    userService: UserService
+    children?: string
+}
+
 export class UserService {
 
     USER_STORE: string = 'user';
 
-    getLocalStorage(): any {
+    get(): any {
         const data = localStorage.getItem(this.USER_STORE) || '';
         try {
             const result = JSON.parse(data) as User;
@@ -14,15 +20,15 @@ export class UserService {
         }
     }
 
-    setLocalStorage(user: UserProps) {
+    set(user: UserProps) {
         localStorage.setItem(this.USER_STORE, JSON.stringify(user));
     }
 
-    removeUserLocalStorage() {
+    remove() {
         localStorage.removeItem(this.USER_STORE)
     }
 
-    clearLocalStorage() {
+    clear() {
         localStorage.clear();
     }
 }

@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Todo } from "../../models/Todo";
-import { TodoService } from "../../services/TodoService";
+import { ITodoService } from "../../services/TodoService";
 
 
-interface TodoItemsProps {
-    todo: Todo
-    todoService: TodoService
-    children?: string
+interface TodoItemsProps extends ITodoService {
+    todo: Todo    
 }
 
 export default function TodoItem(props: TodoItemsProps) {
@@ -39,7 +37,7 @@ export default function TodoItem(props: TodoItemsProps) {
                     className="uk-checkbox"
                     type="checkbox"
                     checked={done}
-                    onChange={() => handleChange(todo)}
+                    onChange={(event) => handleChange(todo)}
                 />
             </td>
             <td className="uk-width-expand">

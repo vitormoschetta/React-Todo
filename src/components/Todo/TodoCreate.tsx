@@ -1,15 +1,10 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Todo } from '../../models/Todo';
-import { TodoService } from '../../services/TodoService'
+import { ITodoService } from '../../services/TodoService'
 
 
-interface TodoCreateProps {
-    todoService: TodoService
-    children?: string
-}
-
-export default function TodoCreate(props: TodoCreateProps) {
+export default function TodoCreate(props: ITodoService) {
 
     const { todoService } = props
 

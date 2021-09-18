@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import { IUserService } from '../../services/UserService';
 import UserNav from './NavUser';
 
 
-export default function Navbar() {    
+export default function Navbar(props: IUserService) {         
 
     return (
         <div className="uk-container">
@@ -13,7 +14,7 @@ export default function Navbar() {
                 <div className="uk-navbar-letf">
                     <Link to="/todos" className="uk-navbar-item uk-logo">Todos</Link>
                 </div>
-                <UserNav />                
+                <UserNav userService={props.userService}/>                
             </nav>
         </div>
     );

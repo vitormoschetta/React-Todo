@@ -1,19 +1,18 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from '../../contexts/AuthContext';
-import { UserService } from "../../services/UserService";
+import { IUserService } from '../../services/UserService';
 import '../../styles/global.css'
 
 
-export default function UserNav() {
+export default function UserNav(props: IUserService) {
 
-    const { user, setUser } = useContext(AuthContext)
-    const userService = new UserService()
-
+    const { userService } = props
+    const { user, setUser } = useContext(AuthContext)    
 
     function onLogout() {
         setUser(null)
-        userService.removeUserLocalStorage()
+        userService.remove()
     }
 
     if (user) {

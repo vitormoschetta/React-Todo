@@ -16,27 +16,30 @@ import { UserService } from "./services/UserService";
 
 export default function App() {
 
+    const userService = new UserService()
+    const todoService = new TodoService()
+
     return (
         <div className="uk-container">
             <Router>
                 <AuthContextProvider>
-                    <Navbar></Navbar>
+                    <Navbar userService={userService} />
                     <div className="uk-padding">
                         <Switch>
                             <Route exact path="/">
                                 <Home />
                             </Route>
                             <Route path="/login">
-                                <Login userService={new UserService()} />
+                                <Login userService={userService} />
                             </Route>
                             <Route exact path="/todos">
-                                <Todos todoService={new TodoService()} />
+                                <Todos todoService={todoService} />
                             </Route>
                             <Route path="/todos/create">
-                                <TodoCreate todoService={new TodoService()} />
+                                <TodoCreate todoService={todoService} />
                             </Route>
                             <Route path="/todos/delete">
-                                <TodoDelete todoService={new TodoService()} />
+                                <TodoDelete todoService={todoService} />
                             </Route>
                         </Switch>
                     </div>

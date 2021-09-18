@@ -2,16 +2,11 @@ import { FormEvent } from "react";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
+import { IUserService } from "../services/UserService";
 import { User } from "../models/User";
-import { UserService } from "../services/UserService";
 
 
-interface LoginProps {
-  userService: UserService
-  children?: string
-}
-
-export default function Login(props: LoginProps) {
+export default function Login(props: IUserService) {
 
   const { userService } = props
   const { user, setUser } = useContext(AuthContext)
@@ -34,7 +29,7 @@ export default function Login(props: LoginProps) {
 
     setUser(user)
 
-    userService.setLocalStorage(user)
+    userService.set(user)
 
     history.push('/todos')
   }
