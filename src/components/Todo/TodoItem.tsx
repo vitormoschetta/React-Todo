@@ -18,7 +18,7 @@ export default function TodoItem(props: TodoItemsProps) {
 
     const history = useHistory()
 
-    function handleChange(click: string, todo: Todo) {        
+    function handleChange(todo: Todo) {        
         todo.done = !todo.done
         setDone(todo.done)
         todoService.updateDone(todo)
@@ -39,7 +39,7 @@ export default function TodoItem(props: TodoItemsProps) {
                     className="uk-checkbox"
                     type="checkbox"
                     checked={done}
-                    onChange={(event) => handleChange(event?.target.value, todo)}
+                    onChange={() => handleChange(todo)}
                 />
             </td>
             <td className="uk-width-expand">
