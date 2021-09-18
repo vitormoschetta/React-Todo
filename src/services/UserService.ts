@@ -1,21 +1,25 @@
-import { User } from "../models/User";
+import { User, UserProps } from "../models/User";
 
 export class UserService {
 
     USER_STORE: string = 'user';
 
-    getLocalStorage(): User {
+    getLocalStorage(): any {
         const data = localStorage.getItem(this.USER_STORE) || '';
-        const result = JSON.parse(data) as User;
-        return result;
+        try {
+            const result = JSON.parse(data) as User;
+            return result;
+        } catch (error) {
+            return null;
+        }
     }
 
-    setLocalStorage(user: User) {
+    setLocalStorage(user: UserProps) {
         localStorage.setItem(this.USER_STORE, JSON.stringify(user));
     }
 
-    removeUserLocalStorage(key: string) {
-        localStorage.removeItem(key)
+    removeUserLocalStorage() {
+        localStorage.removeItem(this.USER_STORE)
     }
 
     clearLocalStorage() {

@@ -9,10 +9,11 @@ export default function UserNav() {
 
     const { user, setUser } = useContext(AuthContext)
     const userService = new UserService()
+    
 
     function logout() { 
         setUser(null) 
-        userService.removeUserLocalStorage('user')
+        userService.removeUserLocalStorage()
     }
 
     if (user) {

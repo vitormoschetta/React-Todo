@@ -1,5 +1,7 @@
-import { createContext, ReactNode, useState } from "react"
+import { createContext, ReactNode, useEffect, useState } from "react"
 import { UserProps } from "../models/User";
+import { UserService } from "../services/UserService";
+
 
 interface AuthContextProps {
     user: UserProps | undefined
@@ -14,10 +16,14 @@ export const AuthContext = createContext({} as AuthContextProps)
 
 export default function AuthContextProvider(props: AuthContextProviderProps) {
 
-    const [user, setUser] = useState<UserProps>();
-
+    const [user, setUser] = useState<UserProps>()
+    const userService = new UserService()
+    
     // useEffect(() => {
-    //     setUser(user)
+    //     let userAuth = userService.getLocalStorage()
+    //     if (userAuth) {
+    //         setUser(userAuth)
+    //     }
     // }, [user])
 
     return (
