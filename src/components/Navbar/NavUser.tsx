@@ -18,7 +18,7 @@ export default function UserNav(props: IUserService) {
     if (user) {
         return (
             <div className="uk-navbar-right">
-                <label className="uk-navbar-item uk-logo">{user.name}</label>
+                <label className="uk-navbar-item uk-logo">{user.username}</label>
                 <label className="uk-navbar-item uk-logo cursor-pointer" onClick={onLogout}>Sair</label>
             </div>
         )

@@ -8,6 +8,7 @@ import TodoDelete from "./components/Todo/TodoDelete";
 import AuthContextProvider from "./contexts/AuthContext";
 import { TodoService } from "./services/TodoService";
 import { UserService } from "./services/UserService";
+import api from "./services/api";
 import {
     BrowserRouter as Router,
     Switch,
@@ -57,46 +58,6 @@ export default class App extends React.Component {
         )
     }
 
-}
-
-
-
-
-// ########### or use a funcion:
-
-export function App2() {
-
-    const userService = new UserService()
-    const todoService = new TodoService()
-
-    return (
-        <div className="uk-container">
-            <Router>
-                <AuthContextProvider>
-                    <Navbar userService={userService} />
-                    <div className="uk-padding">
-                        <Switch>
-                            <Route exact path="/">
-                                <Home />
-                            </Route>
-                            <Route path="/login">
-                                <Login userService={userService} />
-                            </Route>
-                            <Route exact path="/todos">
-                                <Todos todoService={todoService} />
-                            </Route>
-                            <Route path="/todos/create">
-                                <TodoCreate todoService={todoService} />
-                            </Route>
-                            <Route path="/todos/delete">
-                                <TodoDelete todoService={todoService} />
-                            </Route>
-                        </Switch>
-                    </div>
-                </AuthContextProvider>
-            </Router>
-        </div>
-    );
 }
 
 

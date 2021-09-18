@@ -1,11 +1,11 @@
 export interface IUser {
     id: string
-    name: string
+    username: string
 }
 
 export class User implements IUser {
     constructor(
         public id: string,
-        public name: string
+        public username: string
     ) { }
 }
