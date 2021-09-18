@@ -1,5 +1,14 @@
+import { TodoService } from "../../services/TodoService";
 
-export default function TodoDelete() {
+
+interface TodoDeleteProps {
+    todoService: TodoService
+    children?: string
+}
+
+export default function TodoDelete(props: TodoDeleteProps) {
+
+    const { todoService } = props
 
     return (
         <form>

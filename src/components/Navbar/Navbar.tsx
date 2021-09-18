@@ -1,12 +1,8 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
 import UserNav from './NavUser';
 
 
-export default function Navbar() {
-
-    const { user } = useContext(AuthContext)
+export default function Navbar() {    
 
     return (
         <div className="uk-container">

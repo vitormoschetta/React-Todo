@@ -11,6 +11,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import { UserService } from "./services/UserService";
 
 
 export default function App() {
@@ -26,7 +27,7 @@ export default function App() {
                                 <Home />
                             </Route>
                             <Route path="/login">
-                                <Login />
+                                <Login userService={new UserService()} />
                             </Route>
                             <Route exact path="/todos">
                                 <Todos todoService={new TodoService()} />
@@ -35,7 +36,7 @@ export default function App() {
                                 <TodoCreate todoService={new TodoService()} />
                             </Route>
                             <Route path="/todos/delete">
-                                <TodoDelete />
+                                <TodoDelete todoService={new TodoService()} />
                             </Route>
                         </Switch>
                     </div>

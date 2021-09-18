@@ -11,10 +11,12 @@ interface TodoCreateProps {
 
 export default function TodoCreate(props: TodoCreateProps) {
 
-    let history = useHistory()
+    const { todoService } = props
 
     const [title, setTitle] = useState('')
     const [submit, setSubmit] = useState(false)
+
+    let history = useHistory()    
 
     function handleTodo(event: FormEvent) {
 
@@ -24,11 +26,11 @@ export default function TodoCreate(props: TodoCreateProps) {
 
         if (title.trim() === '') return
 
-        let id = props.todoService.get().length++
+        let id = todoService.get().length++
 
         let todo = new Todo(title, false, id)
 
-        props.todoService.save(todo)
+        todoService.save(todo)
 
         history.push('/todos')
     }

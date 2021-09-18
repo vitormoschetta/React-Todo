@@ -6,15 +6,21 @@ import { User } from "../models/User";
 import { UserService } from "../services/UserService";
 
 
-export default function Login() {
+interface LoginProps {
+  userService: UserService
+  children?: string
+}
 
-  let history = useHistory()
+export default function Login(props: LoginProps) {
+
+  const { userService } = props
+  const { user, setUser } = useContext(AuthContext)
 
   const [userName, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [submit, setSubmit] = useState(false)
 
-  const { setUser } = useContext(AuthContext)
+  let history = useHistory()
 
   function handleLogin(event: FormEvent) {
 
@@ -22,13 +28,11 @@ export default function Login() {
 
     setSubmit(true)
 
-    if (userName.trim() === '') return    
+    if (userName.trim() === '') return
 
     let user = new User('1', userName)
 
     setUser(user)
-
-    const userService = new UserService()
 
     userService.setLocalStorage(user)
 
