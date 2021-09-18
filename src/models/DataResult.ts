@@ -1,6 +1,7 @@
 export class DataResult {
     constructor(
-        success: boolean,
-        message: string,
-        object: any = null) { }
+        public success: boolean,
+        public message: string,
+        public object: any = null
+    ) { }
 }

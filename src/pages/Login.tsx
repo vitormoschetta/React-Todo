@@ -1,15 +1,20 @@
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
+import { User } from "../models/User";
+import { UserService } from "../services/UserService";
 
 
 export default function Login() {
 
   const { user, setUser } = useContext(AuthContext)
   let history = useHistory()
+  const userSerice = new UserService()
 
   function login() {
-    setUser({ id: '1', name: 'vitor' })
+    let user = new User('1', 'Vitor')
+    setUser(user)
+    userSerice.setLocalStorage(user)
     history.push('/todos')
   }
 

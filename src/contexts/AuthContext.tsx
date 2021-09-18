@@ -1,9 +1,5 @@
 import { createContext, ReactNode, useState } from "react"
-
-interface UserProps {
-    id: string
-    name: string
-}
+import { UserProps } from "../models/User";
 
 interface AuthContextProps {
     user: UserProps | undefined
