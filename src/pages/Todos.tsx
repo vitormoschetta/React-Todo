@@ -4,6 +4,7 @@ import { TodoService } from '../services/TodoService';
 import { useContext } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import '../styles/todos.css'
+import TodoItems from '../components/Todo/TodoItems';
 
 
 interface TodoListProps {
@@ -12,24 +13,16 @@ interface TodoListProps {
 }
 
 export default function TodoList(props: TodoListProps) {
-
-    const { user } = useContext(AuthContext)
+    
     const { todoService } = props
+    const { user } = useContext(AuthContext)
 
     let match = useRouteMatch()
     let history = useHistory()
 
     if (!user) history.push('/login')
 
-    const todos = todoService.get()
-
-    function handleChange(event: any) {
-    }
-
-    function onRemove(todo: Todo) {
-        todoService.remove(todo)
-        history.push('/todos')
-    }
+    const todos = todoService.get()   
 
     return (
         <div>
@@ -52,30 +45,7 @@ export default function TodoList(props: TodoListProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        todos?.map(todo => (
-                            <tr className="uk-animation-slide-bottom-medium">
-                                <td className="uk-width-auto">
-                                    <input
-                                        className="uk-checkbox"
-                                        type="checkbox"
-                                        checked={todo.done}
-                                        onChange={handleChange}
-                                    />
-                                </td>
-                                <td className="uk-width-expand">
-                                    {todo.title}
-                                </td>
-                                <td className="uk-width-auto">
-                                    <button
-                                        className="uk-icon-button uk-button-danger"
-                                        uk-icon="trash"
-                                        onClick={() => onRemove(todo)}
-                                    />
-                                </td>
-                            </tr>
-                        ))
-                    }
+                    <TodoItems todoService={todoService} todos={todos} />
                 </tbody>
             </table>
         </div>
