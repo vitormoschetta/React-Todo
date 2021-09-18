@@ -1,3 +1,9 @@
+export interface IDataResult {
+    success: boolean,
+    message: string,
+    object: any
+}
+
 export class DataResult {
     constructor(
         public success: boolean,

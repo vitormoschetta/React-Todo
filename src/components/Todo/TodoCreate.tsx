@@ -23,7 +23,7 @@ export default function TodoCreate(props: ITodoService) {
 
         let id = todoService.get().length++
 
-        let todo = new Todo(title, false, id)
+        let todo = new Todo(id, title)
 
         todoService.save(todo)
 

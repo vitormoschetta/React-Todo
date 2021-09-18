@@ -1,9 +1,9 @@
-export interface UserProps {
+export interface IUser {
     id: string
     name: string
 }
 
-export class User implements UserProps {
+export class User implements IUser {
     constructor(
         public id: string,
         public name: string

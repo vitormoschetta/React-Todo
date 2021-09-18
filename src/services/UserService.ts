@@ -1,4 +1,4 @@
-import { User, UserProps } from "../models/User";
+import { User, IUser } from "../models/User";
 
 
 export interface IUserService {
@@ -20,7 +20,7 @@ export class UserService {
         }
     }
 
-    set(user: UserProps) {
+    set(user: IUser) {
         localStorage.setItem(this.USER_STORE, JSON.stringify(user));
     }
 
