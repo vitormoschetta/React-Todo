@@ -25,4 +25,9 @@ export class TodoService {
         this.todos = this.get().filter((item) => item.id !== todo.id)
         localStorage.setItem(this.TODO_STORE, JSON.stringify(this.todos));
     }
+
+    updateDone(todo: Todo) {
+        this.todos = this.get().filter((item) => item.id !== todo.id)
+        localStorage.setItem(this.TODO_STORE, JSON.stringify([...this.todos, todo]));
+    }
 }

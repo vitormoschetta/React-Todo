@@ -9,10 +9,10 @@ export default function UserNav() {
 
     const { user, setUser } = useContext(AuthContext)
     const userService = new UserService()
-    
 
-    function logout() { 
-        setUser(null) 
+
+    function onLogout() {
+        setUser(null)
         userService.removeUserLocalStorage()
     }
 
@@ -20,7 +20,7 @@ export default function UserNav() {
         return (
             <div className="uk-navbar-right">
                 <label className="uk-navbar-item uk-logo">{user.name}</label>
-                <label className="uk-navbar-item uk-logo cursor-pointer" onClick={logout}>Sair</label>
+                <label className="uk-navbar-item uk-logo cursor-pointer" onClick={onLogout}>Sair</label>
             </div>
         )
     }

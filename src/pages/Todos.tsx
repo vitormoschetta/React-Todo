@@ -4,7 +4,7 @@ import { TodoService } from '../services/TodoService';
 import { useContext } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import '../styles/todos.css'
-import TodoItems from '../components/Todo/TodoItems';
+import TodoItems from '../components/Todo/TodoItem';
 
 
 interface TodoListProps {
@@ -38,7 +38,13 @@ export default function TodoList(props: TodoListProps) {
                         </th>
                     </tr>
                 </thead>
-                <TodoItems todos={todos} />
+                <tbody>
+                    {
+                        todos?.map(
+                            todo => (<TodoItems todo={todo} todoService={todoService}></TodoItems>)
+                        )
+                    }
+                </tbody>                
             </table>
         </div>
     );
