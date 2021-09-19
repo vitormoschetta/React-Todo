@@ -1,7 +1,7 @@
 import { User, IUser } from "../models/User";
 
 
-export interface IUserService {
+export interface IUserLocalStorageService {
     userLocalStorageService: UserLocalStorageService
     children?: string
 }

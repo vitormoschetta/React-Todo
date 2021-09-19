@@ -3,8 +3,8 @@ import { IUser } from "../models/User";
 
 
 interface AuthContextProps {
-    user: IUser | undefined
-    setUser: any
+    userContext: IUser | undefined
+    setUserContext: any
 }
 
 interface AuthContextProviderProps {
@@ -15,18 +15,10 @@ export const AuthContext = createContext({} as AuthContextProps)
 
 export default function AuthContextProvider(props: AuthContextProviderProps) {
 
-    const [user, setUser] = useState<IUser>()
-    const [texto, setTexto] = useState<string>()
-
-    // useEffect(() => {
-    //     let userAuth = userService.getLocalStorage()
-    //     if (userAuth) {
-    //         setUser(userAuth)
-    //     }
-    // }, [user])
+    const [userContext, setUserContext] = useState<IUser>()
 
     return (
-        <AuthContext.Provider value={{ user, setUser }}>
+        <AuthContext.Provider value={{ userContext, setUserContext }}>
             {props.children}
         </AuthContext.Provider>
     )

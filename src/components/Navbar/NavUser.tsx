@@ -1,25 +1,25 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from '../../contexts/AuthContext';
-import { IUserService } from '../../services/UserLocalStorageService';
+import { IUserLocalStorageService } from '../../services/UserLocalStorageService';
 import '../../styles/global.css'
 
 
-export default function UserNav(props: IUserService) {
+export default function UserNav(props: IUserLocalStorageService) {
 
     const { userLocalStorageService } = props
-    const { user, setUser } = useContext(AuthContext)    
+    const { userContext, setUserContext } = useContext(AuthContext)
 
-    function onLogout() {
-        setUser(null)
+    function logout() {
+        setUserContext(null)
         userLocalStorageService.removeUser()
     }
 
-    if (user) {
+    if (userContext) {
         return (
             <div className="uk-navbar-right">
-                <label className="uk-navbar-item uk-logo">{user.username}</label>
-                <label className="uk-navbar-item uk-logo cursor-pointer" onClick={onLogout}>Sair</label>
+                <label className="uk-navbar-item uk-logo">{userContext.username}</label>
+                <label className="uk-navbar-item uk-logo cursor-pointer" onClick={logout}>Sair</label>
             </div>
         )
     }

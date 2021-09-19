@@ -5,13 +5,12 @@ import api from "../../services/api";
 
 export default function TodoDelete() {
 
-    const location = useLocation();
+    const location = useLocation()
     const history = useHistory()
-
     const todo = location.state as Todo
 
     async function onRemove() {
-        await api.delete(`todos/${todo.id}`);
+        await api.delete(`todos/${todo.id}`)
         history.push('/todos')
     }
 

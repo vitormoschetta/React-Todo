@@ -9,14 +9,14 @@ import '../styles/todos.css'
 
 export default function TodoList() {
 
-    const { user } = useContext(AuthContext)
-
-    let match = useRouteMatch()
-    let history = useHistory()
-
-    if (!user) history.push('/login')
-
+    const { userContext } = useContext(AuthContext)
+    const match = useRouteMatch()
+    const history = useHistory()
     const [todos, setTodos] = useState([]);
+
+    if (!userContext) {
+        history.push('/login')
+    }    
 
     useEffect(() => {
         api.get('todos').then((response) => {

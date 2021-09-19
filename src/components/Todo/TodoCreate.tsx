@@ -4,18 +4,14 @@ import { Todo } from '../../models/Todo';
 import api from '../../services/api';
 
 
-export default function TodoCreate() {    
+export default function TodoCreate() {
 
-    const [title, setTitle] = useState('')    
-
-    let history = useHistory()
+    const [title, setTitle] = useState('')
+    const history = useHistory();
 
     async function handleTodo(event: FormEvent) {
-        event.preventDefault()        
-        if (title.trim() === '') return
-        let todo = new Todo(title)
-        await api.post('todos', todo);    
-        history.push('/todos')
+        event.preventDefault()
+        await handlerTodo(title, history)
     }
 
     return (
@@ -45,4 +41,17 @@ export default function TodoCreate() {
             </button>
         </form>
     );
+}
+
+
+async function handlerTodo(title: any, history: any) {
+
+    if (title.trim() === '') {
+        return
+    }
+    let todo = new Todo(title)
+
+    await api.post('todos', todo)
+
+    history.push('/todos')
 }

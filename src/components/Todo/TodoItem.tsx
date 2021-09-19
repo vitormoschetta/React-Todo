@@ -11,9 +11,7 @@ interface TodoItemsProps {
 export default function TodoItem(props: TodoItemsProps) {
 
     const { todo } = props
-
     const [done, setDone] = useState(todo.done)
-
     const history = useHistory()
 
     async function handleChange(todo: Todo) {        

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { IUserService } from '../../services/UserLocalStorageService';
+import { IUserLocalStorageService } from '../../services/UserLocalStorageService';
 import UserNav from './NavUser';
 
 
-export default function Navbar(props: IUserService) {         
+export default function Navbar(props: IUserLocalStorageService) {         
 
     return (
         <div className="uk-container">

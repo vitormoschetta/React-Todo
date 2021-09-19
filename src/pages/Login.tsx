@@ -2,16 +2,18 @@ import { FormEvent, useEffect } from "react";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
-import { IUserService } from "../services/UserLocalStorageService";
+import { IUserLocalStorageService } from "../services/UserLocalStorageService";
 import { User, UserLogin } from "../models/User";
 import api from "../services/api";
 
 
-export default function Login(props: IUserService) {
+export default function Login(props: IUserLocalStorageService) {
 
+  // storage user int the browser and context in memory in the app
   const { userLocalStorageService } = props
-  const { user, setUser } = useContext(AuthContext)
+  const { setUserContext } = useContext(AuthContext)
 
+  // form control properties
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [submit, setSubmit] = useState(false)
@@ -20,40 +22,18 @@ export default function Login(props: IUserService) {
   let history = useHistory()
 
   useEffect(() => {
-    let userLocalStorage = userLocalStorageService.getUser()
-    if (userLocalStorage as User) {
-      setUser(userLocalStorageService.getUser())
-      history.push('/todos')
-    }
+    userIsLogged(userLocalStorageService, setUserContext, history)
   }, []);
 
-  function handleLogin(event: FormEvent) {
-
+  function login(event: FormEvent) {
     event.preventDefault()
-
     setSubmit(true)
-
-    if (email.trim() === '') return
-
-    let userLogin = new UserLogin(email, password)
-
-    api.post('login', userLogin)
-      .then((response) => {
-        const { user, accessToken } = response.data
-        setUser(user)
-        userLocalStorageService.setUser(user)
-        history.push('/todos')
-      })
-      .catch((error) => {
-        if (error.response) {
-          setError({ data: error.response.data, status: error.response.status })
-        }
-      })
+    handleLogin(email, password, setUserContext, userLocalStorageService, history, setError)
   }
 
   return (
     <div className="uk-container">
-      <form onSubmit={handleLogin}>
+      <form onSubmit={login}>
         <div className="uk-margin">
           <UsernameError submit={submit} username={email.trim()} error={error} />
           <input
@@ -110,3 +90,36 @@ export function UsernameError(props: any) {
 
   return null;
 }
+
+
+export function userIsLogged(userLocalStorageService: any, setUserContext: any, history: any) {
+  let userLocalStorage = userLocalStorageService.getUser()
+  if (userLocalStorage as User) {
+    setUserContext(userLocalStorage)
+    history.push('/todos')
+  }
+}
+
+
+export function handleLogin(email: any, password: any, setUserContext: any, userLocalStorageService: any, history: any, setError: any) {
+
+  if (email.trim() === '') {
+    return
+  }
+
+  let userLogin = new UserLogin(email, password)
+
+  api.post('login', userLogin)
+    .then((response) => {
+      const { user, accessToken } = response.data
+      setUserContext(user)
+      userLocalStorageService.setUser(user)
+      history.push('/todos')
+    })
+    .catch((error) => {
+      if (error.response) {
+        setError({ data: error.response.data, status: error.response.status })
+      }
+    })
+}
+
