@@ -15,6 +15,7 @@ export default function Login(props: IUserService) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [submit, setSubmit] = useState(false)
+  const [error, setError] = useState({})
 
   let history = useHistory()
 
@@ -23,10 +24,10 @@ export default function Login(props: IUserService) {
     if (localStorage as User) {
       setUser(userService.get())
       history.push('/todos')
-    }    
+    }
   }, []);
 
-  async function handleLogin(event: FormEvent) {
+  function handleLogin(event: FormEvent) {
 
     event.preventDefault()
 
@@ -34,23 +35,27 @@ export default function Login(props: IUserService) {
 
     if (email.trim() === '') return
 
-    let userLogin = new UserLogin(email, password);
+    let userLogin = new UserLogin(email, password)
 
-    const response = await api.post('login', userLogin);
-    const { user, accessToken } = response.data;
-
-    setUser(user)
-
-    userService.set(user)
-
-    history.push('/todos')
+    api.post('login', userLogin)
+      .then((response) => {
+        const { user, accessToken } = response.data
+        setUser(user)
+        userService.set(user)
+        history.push('/todos')
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError({ data: error.response.data, status: error.response.status })
+        }
+      })
   }
 
   return (
     <div className="uk-container">
       <form onSubmit={handleLogin}>
         <div className="uk-margin">
-          <UsernameError submit={submit} username={email.trim()} />
+          <UsernameError submit={submit} username={email.trim()} error={error} />
           <input
             className="uk-input uk-form-width-large uk-form-large"
             type="text"
@@ -83,13 +88,22 @@ export default function Login(props: IUserService) {
 
 export function UsernameError(props: any) {
 
-  const { submit, username } = props
+  const { submit, username, error } = props
 
   if (submit && username === '') {
     return (
       <div className="uk-alert-danger" uk-alert>
         <a className="uk-alert-close" uk-close></a>
-        <p>Login inválido!</p>
+        <p>Informe um login!</p>
+      </div>
+    );
+  }
+
+  if (submit && error !== null) {
+    return (
+      <div className="uk-alert-danger" uk-alert>
+        <a className="uk-alert-close" uk-close></a>
+        <p>{error.status}: {error.data}</p>
       </div>
     );
   }
