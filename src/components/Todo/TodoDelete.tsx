@@ -1,19 +1,17 @@
 import { useHistory, useLocation } from "react-router-dom";
 import { Todo } from "../../models/Todo";
-import { ITodoService } from '../../services/TodoService'
+import api from "../../services/api";
 
 
-export default function TodoDelete(props: ITodoService) {
-
-    const { todoService } = props
+export default function TodoDelete() {
 
     const location = useLocation();
     const history = useHistory()
 
     const todo = location.state as Todo
 
-    function onRemove() {
-        todoService.remove(todo)
+    async function onRemove() {
+        await api.delete(`todos/${todo.id}`);
         history.push('/todos')
     }
 
@@ -22,7 +20,7 @@ export default function TodoDelete(props: ITodoService) {
             <div className="uk-margin">
                 <input
                     className="uk-input uk-form-width-large uk-form-large"
-                    type="text"                    
+                    type="text"
                     value={todo.title}
                     disabled
                 />

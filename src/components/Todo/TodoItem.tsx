@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Todo } from "../../models/Todo";
-import { ITodoService } from "../../services/TodoService";
+import api from "../../services/api";
 
 
-interface TodoItemsProps extends ITodoService {
+interface TodoItemsProps {
     todo: Todo    
 }
 
 export default function TodoItem(props: TodoItemsProps) {
 
-    const { todo, todoService } = props
+    const { todo } = props
 
     const [done, setDone] = useState(todo.done)
 
     const history = useHistory()
 
-    function handleChange(todo: Todo) {        
+    async function handleChange(todo: Todo) {        
         todo.done = !todo.done
-        setDone(todo.done)
-        todoService.updateDone(todo)
+        await api.put(`todos/${todo.id}`, todo);
+        setDone(todo.done)        
     }
 
     function onRemoveConfirm(todo: Todo) {

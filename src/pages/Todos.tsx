@@ -1,15 +1,14 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { Todo } from '../models/Todo';
 import { ITodoService, TodoService } from '../services/TodoService';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import '../styles/todos.css'
 import TodoItem from '../components/Todo/TodoItem';
+import api from '../services/api';
 
 
-export default function TodoList(props: ITodoService) {
-
-    const { todoService } = props
+export default function TodoList() {
 
     const { user } = useContext(AuthContext)
 
@@ -18,7 +17,13 @@ export default function TodoList(props: ITodoService) {
 
     if (!user) history.push('/login')
 
-    const todos = todoService.get()
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        api.get('todos').then((response) => {
+            setTodos(response.data);
+        });
+    }, []);
 
     return (
         <div>
@@ -37,7 +42,7 @@ export default function TodoList(props: ITodoService) {
                 <tbody>
                     {
                         todos?.map(
-                            todo => (<TodoItem todo={todo} todoService={todoService}></TodoItem>)
+                            todo => (<TodoItem todo={todo} />)
                         )
                     }
                 </tbody>

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -8,7 +8,6 @@ import TodoDelete from "./components/Todo/TodoDelete";
 import AuthContextProvider from "./contexts/AuthContext";
 import { TodoService } from "./services/TodoService";
 import { UserService } from "./services/UserService";
-import api from "./services/api";
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,43 +15,41 @@ import {
 } from "react-router-dom";
 
 
-export default class App extends React.Component {
+export default function App() {
 
-    private userService = new UserService()
-    private todoService = new TodoService()
+    const userService = new UserService();
 
-    public render() {
-        return (
-            <div className="uk-container">
-                <Router>
-                    <AuthContextProvider>
-                        <Navbar userService={this.userService} />
-                        <div className="uk-padding">
-                            {this.ContentRoutes()}
-                        </div>
-                    </AuthContextProvider>
-                </Router>
-            </div>
-        )
-    }
+    return (
+        <div className="uk-container">
+            <Router>
+                <AuthContextProvider>
+                    <Navbar userService={userService} />
+                    <div className="uk-padding">
+                        {ContentRoutes()}
+                    </div>
+                </AuthContextProvider>
+            </Router>
+        </div>
+    )
 
-    private ContentRoutes() {
+
+    function ContentRoutes() {
         return (
             <Switch>
                 <Route exact path="/">
                     <Home />
                 </Route>
                 <Route path="/login">
-                    <Login userService={this.userService} />
+                    <Login userService={userService} />
                 </Route>
                 <Route exact path="/todos">
-                    <Todos todoService={this.todoService} />
+                    <Todos />
                 </Route>
                 <Route path="/todos/create">
-                    <TodoCreate todoService={this.todoService} />
+                    <TodoCreate />
                 </Route>
                 <Route path="/todos/delete">
-                    <TodoDelete todoService={this.todoService} />
+                    <TodoDelete />
                 </Route>
             </Switch>
         )

@@ -1,32 +1,20 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Todo } from '../../models/Todo';
-import { ITodoService } from '../../services/TodoService'
+import api from '../../services/api';
 
 
-export default function TodoCreate(props: ITodoService) {
+export default function TodoCreate() {    
 
-    const { todoService } = props
-
-    const [title, setTitle] = useState('')
-    const [submit, setSubmit] = useState(false)
+    const [title, setTitle] = useState('')    
 
     let history = useHistory()
 
-    function handleTodo(event: FormEvent) {
-
-        event.preventDefault()
-
-        setSubmit(true)
-
+    async function handleTodo(event: FormEvent) {
+        event.preventDefault()        
         if (title.trim() === '') return
-
-        let id = todoService.get().length++
-
-        let todo = new Todo(id, title)
-
-        todoService.save(todo)
-
+        let todo = new Todo(title)
+        await api.post('todos', todo);    
         history.push('/todos')
     }
 
