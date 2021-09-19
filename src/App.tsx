@@ -1,4 +1,3 @@
-import React, { ReactNode, useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -6,7 +5,6 @@ import Todos from "./pages/Todos";
 import TodoCreate from "./components/Todo/TodoCreate";
 import TodoDelete from "./components/Todo/TodoDelete";
 import AuthContextProvider from "./contexts/AuthContext";
-import { TodoService } from "./services/TodoService";
 import { UserService } from "./services/UserService";
 import {
     BrowserRouter as Router,
