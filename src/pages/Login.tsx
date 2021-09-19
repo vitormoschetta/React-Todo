@@ -1,9 +1,9 @@
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 import { IUserService } from "../services/UserService";
-import { UserLogin } from "../models/User";
+import { User, UserLogin } from "../models/User";
 import api from "../services/api";
 
 
@@ -17,6 +17,14 @@ export default function Login(props: IUserService) {
   const [submit, setSubmit] = useState(false)
 
   let history = useHistory()
+
+  useEffect(() => {
+    let localStorage = userService.get()
+    if (localStorage as User) {
+      setUser(userService.get())
+      history.push('/todos')
+    }    
+  }, []);
 
   async function handleLogin(event: FormEvent) {
 
@@ -46,7 +54,7 @@ export default function Login(props: IUserService) {
           <input
             className="uk-input uk-form-width-large uk-form-large"
             type="text"
-            placeholder="Username"
+            placeholder="E-mail"
             onChange={event => setEmail(event.target.value)}
             value={email}
           />
