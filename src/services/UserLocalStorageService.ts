@@ -2,15 +2,15 @@ import { User, IUser } from "../models/User";
 
 
 export interface IUserService {
-    userService: UserService
+    userLocalStorageService: UserLocalStorageService
     children?: string
 }
 
-export class UserService {
+export default class UserLocalStorageService {
 
     USER_STORE: string = 'user';
 
-    get(): any {
+    getUser(): any {
         const data = localStorage.getItem(this.USER_STORE) || '';
         try {
             const result = JSON.parse(data) as User;
@@ -20,16 +20,12 @@ export class UserService {
         }
     }
 
-    set(user: IUser) {
+    setUser(user: IUser) {
         localStorage.setItem(this.USER_STORE, JSON.stringify(user));
     }
 
-    remove() {
+    removeUser() {
         localStorage.removeItem(this.USER_STORE)
-    }
-
-    clear() {
-        localStorage.clear();
     }
 }
 

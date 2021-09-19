@@ -1,11 +1,10 @@
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
-import { Todo } from '../models/Todo';
-import { ITodoService, TodoService } from '../services/TodoService';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from "../contexts/AuthContext";
-import '../styles/todos.css'
 import TodoItem from '../components/Todo/TodoItem';
 import api from '../services/api';
+import '../styles/todos.css'
+
 
 
 export default function TodoList() {

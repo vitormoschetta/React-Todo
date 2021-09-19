@@ -2,14 +2,14 @@ import { FormEvent, useEffect } from "react";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
-import { IUserService } from "../services/UserService";
+import { IUserService } from "../services/UserLocalStorageService";
 import { User, UserLogin } from "../models/User";
 import api from "../services/api";
 
 
 export default function Login(props: IUserService) {
 
-  const { userService } = props
+  const { userLocalStorageService } = props
   const { user, setUser } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
@@ -20,9 +20,9 @@ export default function Login(props: IUserService) {
   let history = useHistory()
 
   useEffect(() => {
-    let localStorage = userService.get()
-    if (localStorage as User) {
-      setUser(userService.get())
+    let userLocalStorage = userLocalStorageService.getUser()
+    if (userLocalStorage as User) {
+      setUser(userLocalStorageService.getUser())
       history.push('/todos')
     }
   }, []);
@@ -41,7 +41,7 @@ export default function Login(props: IUserService) {
       .then((response) => {
         const { user, accessToken } = response.data
         setUser(user)
-        userService.set(user)
+        userLocalStorageService.setUser(user)
         history.push('/todos')
       })
       .catch((error) => {

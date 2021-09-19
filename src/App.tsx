@@ -5,7 +5,7 @@ import Todos from "./pages/Todos";
 import TodoCreate from "./components/Todo/TodoCreate";
 import TodoDelete from "./components/Todo/TodoDelete";
 import AuthContextProvider from "./contexts/AuthContext";
-import { UserService } from "./services/UserService";
+import UserLocalStorageService from "./services/UserLocalStorageService";
 import {
     BrowserRouter as Router,
     Switch,
@@ -15,13 +15,13 @@ import {
 
 export default function App() {
 
-    const userService = new UserService();
+    const userLocalStorageService = new UserLocalStorageService();
 
     return (
         <div className="uk-container">
             <Router>
                 <AuthContextProvider>
-                    <Navbar userService={userService} />
+                    <Navbar userLocalStorageService={userLocalStorageService} />
                     <div className="uk-padding">
                         {ContentRoutes()}
                     </div>
@@ -38,7 +38,7 @@ export default function App() {
                     <Home />
                 </Route>
                 <Route path="/login">
-                    <Login userService={userService} />
+                    <Login userLocalStorageService={userLocalStorageService} />
                 </Route>
                 <Route exact path="/todos">
                     <Todos />

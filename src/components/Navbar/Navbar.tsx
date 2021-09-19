@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { IUserService } from '../../services/UserService';
+import { IUserService } from '../../services/UserLocalStorageService';
 import UserNav from './NavUser';
 
 
@@ -14,7 +14,7 @@ export default function Navbar(props: IUserService) {
                 <div className="uk-navbar-letf">
                     <Link to="/todos" className="uk-navbar-item uk-logo">Todos</Link>
                 </div>
-                <UserNav userService={props.userService}/>                
+                <UserNav userLocalStorageService={props.userLocalStorageService}/>                
             </nav>
         </div>
     );
