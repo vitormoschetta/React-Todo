@@ -3,7 +3,6 @@ import { User, IUser } from "../models/User";
 
 export interface IUserLocalStorageService {
     userLocalStorageService: UserLocalStorageService
-    children?: string
 }
 
 export default class UserLocalStorageService {

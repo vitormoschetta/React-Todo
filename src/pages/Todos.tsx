@@ -9,8 +9,7 @@ import '../styles/todos.css'
 
 export default function TodoList() {
 
-    const { userContext } = useContext(AuthContext)
-    const match = useRouteMatch()
+    const { userContext } = useContext(AuthContext)    
     const history = useHistory()
     const [todos, setTodos] = useState([]);
 
@@ -32,7 +31,7 @@ export default function TodoList() {
                         <th>#</th>
                         <th>Tasks</th>
                         <th>
-                            <Link to={`${match.url}/create`}>
+                            <Link to={`${useRouteMatch().url}/create`}>
                                 <span uk-icon="icon: plus; ratio: 1.5"></span>
                             </Link>
                         </th>

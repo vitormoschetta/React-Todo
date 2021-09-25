@@ -1,11 +1,10 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from '../../contexts/AuthContext';
-import { IUserLocalStorageService } from '../../services/UserLocalStorageService';
 import '../../styles/global.css'
 
 
-export default function UserNav(props: IUserLocalStorageService) {
+export default function UserNav(props: any) {
 
     const { userLocalStorageService } = props
     const { userContext, setUserContext } = useContext(AuthContext)

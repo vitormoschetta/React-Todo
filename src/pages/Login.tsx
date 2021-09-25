@@ -2,12 +2,11 @@ import { FormEvent, useEffect } from "react";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
-import { IUserLocalStorageService } from "../services/UserLocalStorageService";
 import { User, UserLogin } from "../models/User";
-import api from "../services/api";
+import LoginAux from "./LoginAux";
 
 
-export default function Login(props: IUserLocalStorageService) {
+export default function Login(props: any) {
 
   // storage user int the browser and context in memory in the app
   const { userLocalStorageService } = props
@@ -20,15 +19,16 @@ export default function Login(props: IUserLocalStorageService) {
   const [error, setError] = useState({})
 
   let history = useHistory()
+  const loginAux = new LoginAux()
 
   useEffect(() => {
-    userIsLogged(userLocalStorageService, setUserContext, history)
+    loginAux.userIsLogged(userLocalStorageService, setUserContext, history)
   }, []);
 
   function login(event: FormEvent) {
     event.preventDefault()
     setSubmit(true)
-    handleLogin(email, password, setUserContext, userLocalStorageService, history, setError)
+    loginAux.handleLogin(email, password, setUserContext, userLocalStorageService, history, setError)
   }
 
   return (
@@ -65,7 +65,6 @@ export default function Login(props: IUserLocalStorageService) {
   );
 }
 
-
 export function UsernameError(props: any) {
 
   const { submit, username, error } = props
@@ -90,36 +89,3 @@ export function UsernameError(props: any) {
 
   return null;
 }
-
-
-export function userIsLogged(userLocalStorageService: any, setUserContext: any, history: any) {
-  let userLocalStorage = userLocalStorageService.getUser()
-  if (userLocalStorage as User) {
-    setUserContext(userLocalStorage)
-    history.push('/todos')
-  }
-}
-
-
-export function handleLogin(email: any, password: any, setUserContext: any, userLocalStorageService: any, history: any, setError: any) {
-
-  if (email.trim() === '') {
-    return
-  }
-
-  let userLogin = new UserLogin(email, password)
-
-  api.post('login', userLogin)
-    .then((response) => {
-      const { user, accessToken } = response.data
-      setUserContext(user)
-      userLocalStorageService.setUser(user)
-      history.push('/todos')
-    })
-    .catch((error) => {
-      if (error.response) {
-        setError({ data: error.response.data, status: error.response.status })
-      }
-    })
-}
-
